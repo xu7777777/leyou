@@ -160,8 +160,12 @@ public class GoodsService {
         return skus;
     }
 
+    /**
+     * 更新商品
+     * @param spuBo
+     */
     @Transactional
-    public void update(SpuBo spuBo) {
+    public void updateGoods(SpuBo spuBo) {
         // 查询以前sku
         Sku sku = new Sku();
         sku.setSpuId(spuBo.getId());
@@ -193,4 +197,5 @@ public class GoodsService {
         // 更新spu详情
         this.spuDetailMapper.updateByPrimaryKeySelective(spuBo.getSpuDetail());
     }
+
 }
