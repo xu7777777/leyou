@@ -58,7 +58,7 @@ public class UploadService {
             StorePath storePath = this.storageClient.uploadFile(file.getInputStream(), file.getSize(), ext, null);
 
             //对url进行回显
-            return "http://image.leyou.com/" + storePath.getFullPath();
+            return "http://106.54.86.212/" + storePath.getFullPath();
         } catch (IOException e) {
             LOGGER.info("===============服务器内部错误===========: {}", originalFilename);
             e.printStackTrace();

@@ -3,6 +3,7 @@ package com.leyou.item.controller;
 import com.leyou.common.pojo.PageResult;
 import com.leyou.item.pojo.Brand;
 import com.leyou.item.service.BrandService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.CollectionUtils;
@@ -54,7 +55,7 @@ public class BrandController {
      * @param cids
      * @return
      */
-    @PostMapping("")//fa泛型中的void？
+    @PostMapping("")
     public ResponseEntity<Void> saveBrand(Brand brand, @RequestParam("cids") List<Long> cids) {
         this.brandService.saveBranch(brand, cids);
         return ResponseEntity.status(HttpStatus.CREATED).build();
@@ -80,14 +81,23 @@ public class BrandController {
      * @param id
      * @return
      */
-    @GetMapping("{id}")
-    public ResponseEntity<Brand> queryBrandById(@PathVariable("id") Long id){
+    @GetMapping("/bid/{bid}")
+    public ResponseEntity<Brand> queryBrandById(@PathVariable("bid") Long id){
         Brand brand = this.brandService.queryBrandById(id);
 
         if (brand == null) {
+            System.out.println("该商品不存在！");
             return ResponseEntity.notFound().build();
         }
+
         return ResponseEntity.ok(brand);
+    }
+
+    @RequestMapping("/del/{bid}")
+    public ResponseEntity<String> del(@PathVariable("bid") Long bid){
+        this.brandService.delBrandById(bid);
+
+        return ResponseEntity.ok(null);
     }
 
 }

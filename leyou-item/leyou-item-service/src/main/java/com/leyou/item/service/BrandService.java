@@ -4,7 +4,11 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.leyou.common.pojo.PageResult;
 import com.leyou.item.mapper.BrandMapper;
+import com.leyou.item.mapper.CategoryBrandMapper;
+import com.leyou.item.mapper.CategoryMapper;
 import com.leyou.item.pojo.Brand;
+import com.leyou.item.pojo.Category;
+import com.leyou.item.pojo.CategoryBrand;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,7 +25,13 @@ import java.util.List;
 public class BrandService {
 
     @Resource
+    private CategoryMapper categoryMapper;
+
+    @Resource
     private BrandMapper brandMapper;
+
+    @Resource
+    private CategoryBrandMapper categoryBrandMapper;
 
     /**
      * 根据查询条件分页并排序查询品牌信息
@@ -90,7 +100,23 @@ public class BrandService {
      * @param id
      * @return
      */
-    public Brand queryBrandById(Long id) {
-        return this.brandMapper.selectByPrimaryKey(id);
+    public Brand queryBrandById(Long id) {// ================ 检查这部分代码是否存在sql注入等。
+        //这里使用简单的连表查询可能会更好，而且前端应该再加一个分类标签，将当前的分类显示出来
+        Brand brand = this.brandMapper.selectByPrimaryKey(id);
+        /*
+        Example categoryExample = new Example(CategoryBrand.class);
+        Example.Criteria categoryEC = categoryExample.createCriteria();
+
+        categoryEC.andEqualTo("brandId", id);
+        CategoryBrand categoryBrand = this.categoryBrandMapper.selectOneByExample(categoryExample);
+        Category category = this.categoryMapper.selectByPrimaryKey(categoryBrand.getCategoryId());
+
+        brand.setName(category.getName());
+        */
+        return brand;
+    }
+
+    public void delBrandById(Long bid) {
+        this.brandMapper.deleteByPrimaryKey(bid);
     }
 }

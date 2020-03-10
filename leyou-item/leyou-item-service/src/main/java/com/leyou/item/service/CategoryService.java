@@ -34,4 +34,8 @@ public class CategoryService  {
         List<Category> categories = this.categoryMapper.selectByIdList(ids);
         return categories.stream().map(category -> category.getName()).collect(Collectors.toList());
     }
+
+    public Category queryCategoryById(Long cid) {
+        return this.categoryMapper.selectByPrimaryKey(cid);
+    }
 }

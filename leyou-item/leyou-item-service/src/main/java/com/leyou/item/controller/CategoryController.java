@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -54,6 +55,16 @@ public class CategoryController {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(names);
+    }
+
+    @RequestMapping("bid/{bid}")
+    public ResponseEntity<Category> edit(@PathVariable("bid") Long cid){
+        Category category = this.categoryService.queryCategoryById(cid);
+        if (category == null){
+            System.out.println("该分类已不存在！");
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(category);
     }
 }
 

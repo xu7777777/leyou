@@ -90,7 +90,7 @@ public class GoodsController {
      * @param spuBo
      * @return
      */
-    @PutMapping("goods")
+    @RequestMapping("goods")
     public ResponseEntity<Void> updateGoods(@RequestBody SpuBo spuBo){
         this.goodsService.updateGoods(spuBo);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
