@@ -210,4 +210,8 @@ public class GoodsService {
         this.skuMapper.deleteByExample(skuExample);
 
     }
+
+    public Spu querySpuById(Long id) {
+        return this.spuMapper.selectByPrimaryKey(id);
+    }
 }

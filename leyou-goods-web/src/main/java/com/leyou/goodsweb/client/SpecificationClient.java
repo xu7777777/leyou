@@ -1,11 +1,11 @@
-package com.leyou.search.client;
+package com.leyou.goodsweb.client;
 
 import com.leyou.item.api.SpecificationApi;
 import org.springframework.cloud.openfeign.FeignClient;
 
 /**
- * @Author XuQiaoYang
- * @Date 2020/2/16 14:16
+ * @author xu7777777
+ * @date 2020/3/11 5:43 PM
  */
 @FeignClient(value = "item-service")
 public interface SpecificationClient extends SpecificationApi {

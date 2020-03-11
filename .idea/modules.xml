@@ -8,7 +8,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/hello-vue/hello-vue.iml" filepath="$PROJECT_DIR$/hello-vue/hello-vue.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../leyou-portal/leyou-portal.iml" filepath="$PROJECT_DIR$/../leyou-portal/leyou-portal.iml" />
     </modules>
   </component>
 </project>
