@@ -7,7 +7,7 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:10086/eureka
-    fetch-registry: false
+#    fetch-registry: false
     registry-fetch-interval-seconds: 5
 zuul:
   prefix: /api

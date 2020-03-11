@@ -1,5 +1,7 @@
 package com.leyou.search.pojo;
 
+import java.util.Map;
+
 /**
  * @Author XuQiaoYang
  * @Date 2020/2/16 19:50
@@ -9,8 +11,38 @@ public class SearchRequest {
 
     private Integer page;// 当前页
 
+    private String sortBy;//sort key
+
+    private Boolean descending;//oder
+
+    private Map<String, String> filter; //filter item
+
     private static final Integer DEFAULT_SIZE = 20;// 每页大小，不从页面接收，而是固定大小
     private static final Integer DEFAULT_PAGE = 1;// 默认页
+
+    public Map<String, String> getFilter() {
+        return filter;
+    }
+
+    public void setFilter(Map<String, String> filter) {
+        this.filter = filter;
+    }
+
+    public String getSortBy() {
+        return sortBy;
+    }
+
+    public void setSortBy(String sortBy) {
+        this.sortBy = sortBy;
+    }
+
+    public Boolean getDescending() {
+        return descending;
+    }
+
+    public void setDescending(Boolean descending) {
+        this.descending = descending;
+    }
 
     public String getKey() {
         return key;

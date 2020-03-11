@@ -1,17 +1,16 @@
 package com.leyou.search.controller;
 
 import com.leyou.common.pojo.PageResult;
+import com.leyou.item.pojo.Category;
 import com.leyou.search.pojo.Goods;
 import com.leyou.search.pojo.SearchRequest;
 import com.leyou.search.service.SearchService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @Author XuQiaoYang
@@ -37,4 +36,5 @@ public class SearchController {
         }
         return ResponseEntity.ok(result);
     }
+    
 }
