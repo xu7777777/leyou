@@ -7,10 +7,24 @@ spring:
     elasticsearch:
       cluster-name: elasticsearch
       cluster-nodes: 106.54.86.212:9300
+  jackson:
+    default-property-inclusion: non_null # 配置json处理时忽略空值
 eureka:
   client:
     service-url:
       defaultZone: http://127.0.0.1:10086/eureka
+    register-with-eureka: false
+    fetch-registry: false
   instance:
     lease-renewal-interval-in-seconds: 5 # 每隔5秒发送一次心跳
-    lease-expiration-duration-in-seconds: 10 # 10秒不发送就过期
+    lease-expiration-duration-in-seconds: 30 # 10秒不发送就过期
+
+feign:
+  client:
+    config:
+      default:
+        connect-timeout: 1000000
+        read-timeout: 2000000
+      service-test:
+        connect-timeout: 1000000
+        read-timeout: 2000000

@@ -8,6 +8,7 @@ import com.leyou.item.service.GoodsService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -90,9 +91,17 @@ public class GoodsController {
      * @param spuBo
      * @return
      */
-    @RequestMapping("goods")
-    public ResponseEntity<Void> updateGoods(@RequestBody SpuBo spuBo){
+    @PostMapping("edit")
+    public ResponseEntity<String> updateGoods(@RequestBody SpuBo spuBo){
         this.goodsService.updateGoods(spuBo);
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        return ResponseEntity.ok(null);
+    }
+
+    @Transactional
+    @RequestMapping("del/{gid}")
+    public ResponseEntity<String> del(@PathVariable("gid") Long gid){
+        this.goodsService.deleteGoodsById(gid);
+
+        return ResponseEntity.ok(null);
     }
 }

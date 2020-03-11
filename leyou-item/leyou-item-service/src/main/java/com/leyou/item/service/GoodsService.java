@@ -198,4 +198,16 @@ public class GoodsService {
         this.spuDetailMapper.updateByPrimaryKeySelective(spuBo.getSpuDetail());
     }
 
+    /*
+    删除部分如果能从前台给出所有skuId那么删除方法可以简化
+     */
+    public void deleteGoodsById(Long gid) {
+        this.spuMapper.deleteByPrimaryKey(gid);
+
+        Example skuExample = new Example(Sku.class);
+        Example.Criteria skuEC = skuExample.createCriteria();
+        skuEC.andEqualTo("spuId", gid);
+        this.skuMapper.deleteByExample(skuExample);
+
+    }
 }

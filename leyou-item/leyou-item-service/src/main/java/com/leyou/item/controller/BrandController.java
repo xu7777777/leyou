@@ -81,7 +81,7 @@ public class BrandController {
      * @param id
      * @return
      */
-    @GetMapping("/bid/{bid}")
+    @GetMapping("/{bid}")
     public ResponseEntity<Brand> queryBrandById(@PathVariable("bid") Long id){
         Brand brand = this.brandService.queryBrandById(id);
 

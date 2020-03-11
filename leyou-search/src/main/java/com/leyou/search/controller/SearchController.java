@@ -6,10 +6,10 @@ import com.leyou.search.pojo.SearchRequest;
 import com.leyou.search.service.SearchService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 
@@ -17,8 +17,7 @@ import javax.annotation.Resource;
  * @Author XuQiaoYang
  * @Date 2020/2/16 19:52
  */
-@RequestMapping("search")
-@Controller
+@RestController
 public class SearchController {
 
     @Resource
@@ -32,7 +31,6 @@ public class SearchController {
      */
     @PostMapping("page")
     public ResponseEntity<PageResult<Goods>> search(@RequestBody SearchRequest request) {
-        System.out.println("-----------------------------------");
         PageResult<Goods> result = this.searchService.search(request);
         if (result == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

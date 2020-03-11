@@ -31,10 +31,10 @@ public class CategoryController {
      */
     @GetMapping("list")
     public ResponseEntity<List<Category>> queryCategoriesByPid(@RequestParam(value = "pid", defaultValue = "0") Long pid) {
+        System.out.println("0000000000");
         if (pid == null || pid < 0) {
             return ResponseEntity.badRequest().build();
         }
-
         List<Category> categories = this.categoryService.queryCategoriesByPid(pid);
         if (CollectionUtils.isEmpty(categories)) {
             return ResponseEntity.notFound().build();

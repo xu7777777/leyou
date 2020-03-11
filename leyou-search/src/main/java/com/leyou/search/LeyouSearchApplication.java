@@ -12,9 +12,9 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @SpringBootApplication
 @EnableDiscoveryClient
 @EnableFeignClients
-public class LeyouSearchService {
+public class LeyouSearchApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(LeyouSearchService.class, args);
+        SpringApplication.run(LeyouSearchApplication.class, args);
     }
 }

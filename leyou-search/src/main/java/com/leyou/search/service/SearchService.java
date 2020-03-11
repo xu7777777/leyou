@@ -10,7 +10,7 @@ import com.leyou.search.client.GoodsClient;
 import com.leyou.search.client.SpecificationClient;
 import com.leyou.search.pojo.Goods;
 import com.leyou.search.pojo.SearchRequest;
-import com.leyou.search.repository.GoodsRepository;
+import com.leyou.search.repository.GoodsReponsitory;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
 import org.elasticsearch.index.query.Operator;
@@ -42,7 +42,7 @@ public class SearchService {
     @Resource
     private SpecificationClient specificationClient;
     @Resource
-    private GoodsRepository goodsRepository;
+    private GoodsReponsitory goodsRepository;
 
     public Goods buildGoods(Spu spu) throws IOException {
         Goods goods = new Goods();
@@ -55,7 +55,7 @@ public class SearchService {
         Brand brand = this.brandClient.queryBrandById(spu.getBrandId());
 
         //根据spu的id查询sku，获取所有的价格
-        List<Sku> skus = this.goodsClient.querySkuBySpuId(spu.getId());
+        List<Sku> skus = this.goodsClient.querySkusBySpuId(spu.getId());
         List<Long> prices = new ArrayList<>();
         //搜集sku的必要字段信息
         List<Map<String, Object>> skuMapList = new ArrayList<>();
@@ -155,7 +155,7 @@ public class SearchService {
      * @return
      */
     public PageResult<Goods> search(SearchRequest request) {
-        System.out.println("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
+        System.out.println("search ================");
         String key = request.getKey();
         // 判断是否有搜索条件，如果没有，直接返回null。不允许搜索全部商品
         if (StringUtils.isBlank(key)) {

@@ -2,10 +2,11 @@ package com.leyou.elasticsearch.test;
 
 import com.leyou.common.pojo.PageResult;
 import com.leyou.item.bo.SpuBo;
-import com.leyou.search.LeyouSearchService;
+import com.leyou.item.pojo.Spu;
+import com.leyou.search.LeyouSearchApplication;
 import com.leyou.search.client.GoodsClient;
 import com.leyou.search.pojo.Goods;
-import com.leyou.search.repository.GoodsRepository;
+import com.leyou.search.repository.GoodsReponsitory;
 import com.leyou.search.service.SearchService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,14 +23,14 @@ import java.util.stream.Collectors;
  * @Author XuQiaoYang
  * @Date 2020/2/16 18:31
  */
-@SpringBootTest(classes = LeyouSearchService.class)
+@SpringBootTest(classes = LeyouSearchApplication.class)
 @RunWith(SpringRunner.class)
 public class ElasticsearchTest {
     @Resource
     private ElasticsearchTemplate template;
 
     @Resource
-    private GoodsRepository goodsRepository;
+    private GoodsReponsitory goodsReponsitory;
 
     @Resource
     private SearchService searchService;
@@ -61,11 +62,41 @@ public class ElasticsearchTest {
             }).collect(Collectors.toList());
 
             //执行新增数据的方法
-            this.goodsRepository.saveAll(goodsList);
+            this.goodsReponsitory.saveAll(goodsList);
 
             page++;
             rows = items.size();
         } while (rows == 100);
 
     }
+    @Test
+    public void createIndex(){
+        // 创建索引
+        this.template.createIndex(Goods.class);
+        // 配置映射
+        this.template.putMapping(Goods.class);
+        Integer page = 1;
+        Integer rows = 100;
+
+        do {
+            // 分批查询spuBo
+            PageResult<SpuBo> pageResult = this.goodsClient.querySpuByPage(null, null, page, rows);
+            // 遍历spubo集合转化为List<Goods>
+            List<Goods> goodsList = pageResult.getItems().stream().map(spuBo -> {
+                try {
+                    return this.searchService.buildGoods((Spu) spuBo);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }).collect(Collectors.toList());
+            this.goodsReponsitory.saveAll(goodsList);
+
+            // 获取当前页的数据条数，如果是最后一页，没有100条
+            rows = pageResult.getItems().size();
+            // 每次循环页码加1
+            page++;
+        } while (rows == 100);
+    }
+
 }
