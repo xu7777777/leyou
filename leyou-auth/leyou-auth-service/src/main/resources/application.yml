@@ -16,6 +16,6 @@ leyou:
     secret: leyou@Login(Auth}*^31)&heiMa% # 登录校验的密钥
     pubKeyPath: /Users/xu7777777/profile/key/rsa.pub # 公钥地址
     priKeyPath: /Users/xu7777777/profile/key/rsa.pri # 私钥地址
-    expire: 30 # 过期时间,单位分钟
+    expire: 300 # 过期时间,单位分钟
     cookieName: LY_TOKEN_
-    cookieMaxAge: 30
+    cookieMaxAge: 300

@@ -234,4 +234,8 @@ public class GoodsService {
             logger.error("{}商品消息发送异常，商品id：{}", type, id, e);
         }
     }
+
+    public Sku querySkuById(Long id) {
+        return this.skuMapper.selectByPrimaryKey(id);
+    }
 }

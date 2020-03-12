@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="leyou-auth-common" />
         <module name="leyou-auth-service" />
+        <module name="leyou-cart" />
         <module name="leyou-common" />
         <module name="leyou-gateway" />
         <module name="leyou-goods-web" />
@@ -27,6 +28,7 @@
       <module name="leyou-auth" options="-parameters" />
       <module name="leyou-auth-common" options="-parameters" />
       <module name="leyou-auth-service" options="-parameters" />
+      <module name="leyou-cart" options="-parameters" />
       <module name="leyou-common" options="-parameters" />
       <module name="leyou-gateway" options="-parameters" />
       <module name="leyou-goods-web" options="-parameters" />
