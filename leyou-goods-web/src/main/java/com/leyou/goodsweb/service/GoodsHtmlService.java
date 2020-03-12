@@ -73,4 +73,9 @@ public class GoodsHtmlService {
             }
         });*/
     }
+
+    public void deleteHtml(Long id) {
+        File file = new File("/usr/local/etc/nginx/html/item/", id + ".html");
+        file.deleteOnExit();
+    }
 }

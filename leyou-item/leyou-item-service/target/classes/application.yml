@@ -1,6 +1,14 @@
 server:
   port: 8081
 spring:
+  rabbitmq:
+    host: 106.54.86.212
+    username: leyou
+    password: leyou
+    virtual-host: /leyou
+    template:
+      exchange: leyou.item.exchange
+    publisher-confirms: true
   application:
     name: item-service
   datasource:
