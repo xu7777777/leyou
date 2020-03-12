@@ -15,9 +15,24 @@ zuul:
     item-service: /item/** # 路由到商品的微服务
     search-service: /search/** # 路由到搜索微服务
     user-service: /user/** # 路由到用户微服务
+    auth-service: /auth/** # 授权中心微服务
   host:
     connect-timeout-millis: 15000 #HTTP连接超时要比Hystrix的大
     socket-timeout-millis: 60000   #socket超时
+  add-host-header: true
+  sensitive-headers: # 配置禁止使用的头信息，这里设置为null，否则，set-cookie无效
 ribbon:
   ReadTimeout: 10000
   ConnectTimeout: 10000
+leyou:
+  jwt:
+    pubKeyPath: /Users/xu7777777/profile/key/rsa.pub # 公钥地址
+    cookieName: LY_TOKEN_ # cookie的名称
+  filter:
+    allowPaths:
+    - /api/auth
+    - /api/search
+    - /api/user/register
+    - /api/user/check
+    - /api/user/code
+    - /api/item
