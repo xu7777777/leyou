@@ -16,7 +16,8 @@ zuul:
     search-service: /search/** # 路由到搜索微服务
     user-service: /user/** # 路由到用户微服务
     auth-service: /auth/** # 授权中心微服务
-    cart-service: /cart/** #购物车为服务
+    cart-service: /cart/** #购物车微服务
+    order-service: /order/** #订单微服务
   host:
     connect-timeout-millis: 15000 #HTTP连接超时要比Hystrix的大
     socket-timeout-millis: 60000   #socket超时
@@ -37,3 +38,4 @@ leyou:
     - /api/user/check
     - /api/user/code
     - /api/item
+    - /api/order
